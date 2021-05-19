@@ -38,6 +38,126 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Anio",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Anio",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Mes",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Mes",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoPais",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CodigoPais",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoVehiculo",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CodigoVehiculo",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "UnidadNegocio",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "UnidadNegocio",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "SubUnidadNegocio",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "SubUnidadNegocio",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Grupo",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Grupo",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Moneda",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Moneda",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Presupuesto",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Presupuesto",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Anio",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Annio2"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
