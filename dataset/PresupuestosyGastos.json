@@ -13,7 +13,7 @@
 				"fileName": "presupuestogastosperu_202104.csv",
 				"folderPath": "PR/presupuestosygastos"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": ";",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
