@@ -46,8 +46,7 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "Anio",
-									"type": "String",
+									"name": "Annnio",
 									"physicalType": "UTF8"
 								}
 							},
@@ -144,17 +143,6 @@
 								"sink": {
 									"name": "Presupuesto",
 									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"name": "Anio",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "Anio2",
 									"physicalType": "UTF8"
 								}
 							}
