@@ -1,0 +1,9 @@
+{
+	"name": "dartafactoryeleargomezprueba",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "c2b8ab45-079d-4bfd-8021-431380e82d61",
+		"tenantId": "1eba443f-23e5-4534-90d1-0976aabe86ac"
+	}
+}
