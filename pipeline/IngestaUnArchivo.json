@@ -154,7 +154,8 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "Annio2"
+									"name": "Anio2",
+									"physicalType": "UTF8"
 								}
 							}
 						],
