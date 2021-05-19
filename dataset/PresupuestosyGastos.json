@@ -1,0 +1,22 @@
+{
+	"name": "PresupuestosyGastos",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureFileStorageAlmacEG",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureFileStorageLocation",
+				"folderPath": "PR/presupuestosygastos"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

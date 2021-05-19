@@ -1,0 +1,19 @@
+{
+	"name": "SalidaPresuGastos",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorageSalidaIngesta",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "outingesta"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
