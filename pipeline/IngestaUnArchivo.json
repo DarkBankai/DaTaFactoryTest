@@ -46,7 +46,8 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "Annnio",
+									"name": "Anio",
+									"type": "String",
 									"physicalType": "UTF8"
 								}
 							},
