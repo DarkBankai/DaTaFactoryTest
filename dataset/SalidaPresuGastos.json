@@ -5,12 +5,6 @@
 			"referenceName": "AzureDataLakeStorageSalidaIngesta",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"NombreArchivo": {
-				"type": "string",
-				"defaultValue": "@activity('Get Metadata1').output.itemName"
-			}
-		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {
