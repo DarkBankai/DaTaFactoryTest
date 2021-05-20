@@ -20,17 +20,23 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "PR/presupuestosygastos/presupuestogastosperu_202104.csv"
+					},
+					{
+						"name": "Destination",
+						"value": "outingesta//"
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "DelimitedTextSource",
 						"additionalColumns": [
 							{
-								"name": "DeLaMetaData",
-								"value": {
-									"value": "@activity('Get Metadata1').output",
-									"type": "Expression"
-								}
+								"name": "ColumnaAdicional",
+								"value": "@activity('Get Metadata1').output"
 							}
 						],
 						"storeSettings": {
@@ -159,6 +165,17 @@
 								},
 								"sink": {
 									"name": "Presupuesto",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "ColumnaAdicional",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ColumnaAdicional",
 									"type": "String",
 									"physicalType": "UTF8"
 								}
