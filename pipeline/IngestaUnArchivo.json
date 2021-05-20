@@ -251,7 +251,8 @@
 		],
 		"parameters": {
 			"ParametroNombre": {
-				"type": "String"
+				"type": "String",
+				"defaultValue": "Archivo1"
 			}
 		},
 		"annotations": []
