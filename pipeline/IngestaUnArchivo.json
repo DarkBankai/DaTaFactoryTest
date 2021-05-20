@@ -45,6 +45,13 @@
 									"value": "@pipeline().globalParameters.Moneda",
 									"type": "Expression"
 								}
+							},
+							{
+								"name": "columnaVariable",
+								"value": {
+									"value": "@variables('PrimeraVariable')",
+									"type": "Expression"
+								}
 							}
 						],
 						"storeSettings": {
@@ -198,6 +205,25 @@
 									"type": "String",
 									"physicalType": "UTF8"
 								}
+							},
+							{
+								"source": {
+									"name": "columanAdicional3",
+									"type": "String"
+								},
+								"sink": {
+									"name": "columanAdicional3",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "columnaVariable",
+									"type": "String"
+								},
+								"sink": {
+									"name": "columnaVariable"
+								}
 							}
 						],
 						"typeConversion": true,
@@ -260,6 +286,12 @@
 			"ParametroNombre": {
 				"type": "String",
 				"defaultValue": "Archivo1"
+			}
+		},
+		"variables": {
+			"PrimeraVariable": {
+				"type": "String",
+				"defaultValue": "4"
 			}
 		},
 		"annotations": []
