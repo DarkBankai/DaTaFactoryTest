@@ -7,7 +7,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Get Metadata1",
+						"activity": "Set variable1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -26,21 +26,21 @@
 						"type": "DelimitedTextSource",
 						"additionalColumns": [
 							{
-								"name": "ColumnaAdicional",
+								"name": "ColumnaResultadoActividad",
 								"value": {
 									"value": "@activity('Get Metadata1').output.itemName",
 									"type": "Expression"
 								}
 							},
 							{
-								"name": "columnaAdicional2",
+								"name": "columnaParametroLocal",
 								"value": {
 									"value": "@pipeline().parameters.ParametroNombre",
 									"type": "Expression"
 								}
 							},
 							{
-								"name": "columanAdicional3",
+								"name": "columanParametroGlobal",
 								"value": {
 									"value": "@pipeline().globalParameters.Moneda",
 									"type": "Expression"
@@ -186,33 +186,34 @@
 							},
 							{
 								"source": {
-									"name": "ColumnaAdicional",
+									"name": "ColumnaResultadoActividad",
 									"type": "String"
 								},
 								"sink": {
-									"name": "ColumnaAdicional",
+									"name": "ColumnaResultadoActividad",
 									"type": "String",
 									"physicalType": "UTF8"
 								}
 							},
 							{
 								"source": {
-									"name": "columnaAdicional2",
+									"name": "columnaParametroLocal",
 									"type": "String"
 								},
 								"sink": {
-									"name": "columnaAdicional2",
+									"name": "columnaParametroLocal",
 									"type": "String",
 									"physicalType": "UTF8"
 								}
 							},
 							{
 								"source": {
-									"name": "columanAdicional3",
+									"name": "columanParametroGlobal",
 									"type": "String"
 								},
 								"sink": {
-									"name": "columanAdicional3",
+									"name": "columanParametroGlobal",
+									"type": "String",
 									"physicalType": "UTF8"
 								}
 							},
@@ -222,7 +223,9 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "columnaVariable"
+									"name": "columnaVariable",
+									"type": "String",
+									"physicalType": "UTF8"
 								}
 							}
 						],
@@ -280,6 +283,26 @@
 						"type": "DelimitedTextReadSettings"
 					}
 				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Metadata1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "PrimeraVariable",
+					"value": {
+						"value": "@activity('Get Metadata1').output.itemname",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"parameters": {
@@ -291,7 +314,7 @@
 		"variables": {
 			"PrimeraVariable": {
 				"type": "String",
-				"defaultValue": "@activity('Get Metadata1').output.itemName"
+				"defaultValue": "4"
 			}
 		},
 		"annotations": []
