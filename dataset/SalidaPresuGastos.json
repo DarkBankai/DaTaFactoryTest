@@ -16,10 +16,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": {
-					"value": "@dataset().NombreArchivo",
-					"type": "Expression"
-				},
 				"fileSystem": "outingesta"
 			},
 			"compressionCodec": "snappy"
