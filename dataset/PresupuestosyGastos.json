@@ -5,12 +5,20 @@
 			"referenceName": "AzureFileStorageAlmacEG",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"FileName": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureFileStorageLocation",
-				"fileName": "presupuestogastosperu_202104.csv",
+				"fileName": {
+					"value": "@dataset().FileName",
+					"type": "Expression"
+				},
 				"folderPath": "PR/presupuestosygastos"
 			},
 			"columnDelimiter": ";",
