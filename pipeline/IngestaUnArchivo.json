@@ -31,6 +31,13 @@
 									"value": "@string(activity('Get Metadata1').output)",
 									"type": "Expression"
 								}
+							},
+							{
+								"name": "columnaAdicional2",
+								"value": {
+									"value": "@pipeline().parameters.ParametroNombre",
+									"type": "Expression"
+								}
 							}
 						],
 						"storeSettings": {
@@ -170,6 +177,17 @@
 								},
 								"sink": {
 									"name": "ColumnaAdicional",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "columnaAdicional2",
+									"type": "String"
+								},
+								"sink": {
+									"name": "columnaAdicional2",
 									"type": "String",
 									"physicalType": "UTF8"
 								}
