@@ -28,7 +28,7 @@
 							{
 								"name": "ColumnaAdicional",
 								"value": {
-									"value": "@string(activity('Get Metadata1').output)",
+									"value": "activity('Get Metadata1').output",
 									"type": "Expression"
 								}
 							},
@@ -236,7 +236,7 @@
 						"type": "DatasetReference"
 					},
 					"fieldList": [
-						"columnCount"
+						"itemName"
 					],
 					"storeSettings": {
 						"type": "AzureFileStorageReadSettings",
