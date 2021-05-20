@@ -285,7 +285,7 @@
 		"parameters": {
 			"ParametroNombre": {
 				"type": "String",
-				"defaultValue": "Archivo1"
+				"defaultValue": "@activity('Get Metadata1').output.itemName"
 			}
 		},
 		"variables": {
