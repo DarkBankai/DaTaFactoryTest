@@ -24,6 +24,15 @@
 				"typeProperties": {
 					"source": {
 						"type": "DelimitedTextSource",
+						"additionalColumns": [
+							{
+								"name": "DeLaMetaData",
+								"value": {
+									"value": "@activity('Get Metadata1').output",
+									"type": "Expression"
+								}
+							}
+						],
 						"storeSettings": {
 							"type": "AzureFileStorageReadSettings",
 							"recursive": true,
@@ -200,6 +209,7 @@
 					"fieldList": [],
 					"storeSettings": {
 						"type": "AzureFileStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
