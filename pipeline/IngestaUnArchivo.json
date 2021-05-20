@@ -206,7 +206,9 @@
 						"referenceName": "PresupuestosyGastos",
 						"type": "DatasetReference"
 					},
-					"fieldList": [],
+					"fieldList": [
+						"itemName"
+					],
 					"storeSettings": {
 						"type": "AzureFileStorageReadSettings",
 						"recursive": true,
