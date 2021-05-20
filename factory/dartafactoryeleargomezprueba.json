@@ -1,5 +1,13 @@
 {
 	"name": "dartafactoryeleargomezprueba",
+	"properties": {
+		"globalParameters": {
+			"Moneda": {
+				"type": "string",
+				"value": "Soles"
+			}
+		}
+	},
 	"location": "eastus",
 	"identity": {
 		"type": "SystemAssigned",
