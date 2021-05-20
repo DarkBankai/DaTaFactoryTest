@@ -38,6 +38,13 @@
 									"value": "@pipeline().parameters.ParametroNombre",
 									"type": "Expression"
 								}
+							},
+							{
+								"name": "columanAdicional3",
+								"value": {
+									"value": "@pipeline().globalParameters.Moneda",
+									"type": "Expression"
+								}
 							}
 						],
 						"storeSettings": {
