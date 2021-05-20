@@ -291,7 +291,7 @@
 		"variables": {
 			"PrimeraVariable": {
 				"type": "String",
-				"defaultValue": "4"
+				"defaultValue": "@activity('Get Metadata1').output.itemName"
 			}
 		},
 		"annotations": []
