@@ -20,23 +20,17 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [
-					{
-						"name": "Source",
-						"value": "PR/presupuestosygastos/presupuestogastosperu_202104.csv"
-					},
-					{
-						"name": "Destination",
-						"value": "outingesta//"
-					}
-				],
+				"userProperties": [],
 				"typeProperties": {
 					"source": {
 						"type": "DelimitedTextSource",
 						"additionalColumns": [
 							{
 								"name": "ColumnaAdicional",
-								"value": "@activity('Get Metadata1').output"
+								"value": {
+									"value": "@activity('Get Metadata1').output",
+									"type": "Expression"
+								}
 							}
 						],
 						"storeSettings": {
