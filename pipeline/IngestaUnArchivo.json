@@ -52,6 +52,13 @@
 									"value": "@variables('PrimeraVariable')",
 									"type": "Expression"
 								}
+							},
+							{
+								"name": "substring",
+								"value": {
+									"value": "substring({@variables('PrimeraVariable')},0,5)",
+									"type": "Expression"
+								}
 							}
 						],
 						"storeSettings": {
@@ -226,6 +233,15 @@
 									"name": "columnaVariable",
 									"type": "String",
 									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "substring",
+									"type": "String"
+								},
+								"sink": {
+									"name": "substring"
 								}
 							}
 						],
