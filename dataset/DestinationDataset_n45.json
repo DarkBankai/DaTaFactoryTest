@@ -5,6 +5,9 @@
 			"referenceName": "almacenamientoegsa",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "Capitulo 2"
+		},
 		"annotations": [],
 		"type": "Binary",
 		"typeProperties": {
