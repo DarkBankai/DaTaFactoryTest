@@ -1,0 +1,10 @@
+{
+	"name": "ImportSweetTreatsSales",
+	"properties": {
+		"description": "Importar del CSV sweet treats sales",
+		"folder": {
+			"name": "Capitulo 3"
+		},
+		"annotations": []
+	}
+}
