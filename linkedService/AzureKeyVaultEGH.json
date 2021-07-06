@@ -1,0 +1,11 @@
+{
+	"name": "AzureKeyVaultEGH",
+	"properties": {
+		"description": "Conexion to key value adfbyexample-egh-kv ",
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://adfbyexample-egh-kv.vault.azure.net/"
+		}
+	}
+}
