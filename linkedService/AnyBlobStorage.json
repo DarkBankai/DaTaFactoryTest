@@ -12,7 +12,7 @@
 			"connectionString": {
 				"type": "AzureKeyVaultSecret",
 				"store": {
-					"referenceName": "AzureKeyVaultEGH",
+					"referenceName": "AzureKeyVault_prueba",
 					"type": "LinkedServiceReference"
 				},
 				"secretName": "@linkedService().ConnectionSecret"
