@@ -1,0 +1,23 @@
+{
+	"name": "AnyBlobStorage",
+	"properties": {
+		"type": "AzureBlobStorage",
+		"parameters": {
+			"ConnectionSecret": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVaultEGH",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "@linkedService().ConnectionSecret"
+			}
+		},
+		"description": "it could be used to connect to any Azure storage account."
+	}
+}
