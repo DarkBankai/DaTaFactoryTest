@@ -1,5 +1,5 @@
 {
-	"name": "ImportSugarCubeSales_ds_blob_param",
+	"name": "ImportSugarCubeSales_2",
 	"properties": {
 		"description": "Pipeline para un json",
 		"activities": [
