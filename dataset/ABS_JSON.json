@@ -25,7 +25,7 @@
 				"defaultValue": "."
 			},
 			"LinkedServiceConnectionSecret": {
-				"type": "string"
+				"type": "securestring"
 			}
 		},
 		"folder": {
