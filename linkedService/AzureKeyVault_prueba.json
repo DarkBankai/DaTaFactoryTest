@@ -1,0 +1,10 @@
+{
+	"name": "AzureKeyVault_prueba",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://adfbyexample-egh-kv.vault.azure.net/"
+		}
+	}
+}
