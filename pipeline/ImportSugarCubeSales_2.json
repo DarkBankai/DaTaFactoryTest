@@ -14,7 +14,16 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "@{'sampledata'}/@{'.'}/@{'.'}"
+					},
+					{
+						"name": "Destination",
+						"value": "dbo.Sales_LOAD"
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "JsonSource",
@@ -104,10 +113,7 @@
 							"Container": "sampledata",
 							"Directory": ".",
 							"File": ".",
-							"LinkedServiceConnectionSecret": {
-								"type": "SecureString",
-								"value": "**********"
-							}
+							"LinkedServiceConnectionSecret": "StorageAccountConnectionString"
 						}
 					}
 				],
