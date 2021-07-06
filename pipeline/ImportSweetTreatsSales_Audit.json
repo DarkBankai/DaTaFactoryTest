@@ -31,9 +31,9 @@
 								"value": "$$FILEPATH"
 							},
 							{
-								"name": "PipelineRunId",
+								"name": "RunSeqNo",
 								"value": {
-									"value": "@pipeline().RunId",
+									"value": "@activity('Lookup RunSeqNo').output.firstRow.RunSeqNo",
 									"type": "Expression"
 								}
 							}
@@ -97,7 +97,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[LogPipelineExecution]",
+					"storedProcedureName": "[dbo].[LogPipelineEnd]",
 					"storedProcedureParameters": {
 						"FilesRead": {
 							"value": {
@@ -105,13 +105,6 @@
 								"type": "Expression"
 							},
 							"type": "Int32"
-						},
-						"PipelineRunId": {
-							"value": {
-								"value": "@pipeline().RunId",
-								"type": "Expression"
-							},
-							"type": "Guid"
 						},
 						"RowsCopied": {
 							"value": {
@@ -133,6 +126,17 @@
 								"type": "Expression"
 							},
 							"type": "DateTime"
+						},
+						"RunSeqNo": {
+							"value": {
+								"value": "@activity('Lookup RunSeqNo').output.firstRow.RunSeqNo",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						},
+						"RunStatus": {
+							"value": "Done",
+							"type": "String"
 						}
 					}
 				},
