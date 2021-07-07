@@ -1,0 +1,52 @@
+{
+	"name": "ExecutePipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "Import Desserts4All",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Import SweetTreats",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ImportSTFormatFolder",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"WildcardFolderPath": "azure-data-factory-by-example-main/SampleData/Desserts4All",
+						"WildcardFileName": "*.csv"
+					}
+				}
+			},
+			{
+				"name": "Import SweetTreats",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ImportSTFormatFolder",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"WildcardFolderPath": "azure-data-factory-by-example-main/SampleData/SweetTreats",
+						"WildcardFileName": "*.csv"
+					}
+				}
+			}
+		],
+		"folder": {
+			"name": "Capitulo 5"
+		},
+		"annotations": []
+	}
+}
