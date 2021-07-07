@@ -25,6 +25,10 @@
 			},
 			"LinkedServiceConnectionSecret": {
 				"type": "string"
+			},
+			"EscapeCharacter": {
+				"type": "string",
+				"defaultValue": "/"
 			}
 		},
 		"folder": {
@@ -49,7 +53,10 @@
 				}
 			},
 			"columnDelimiter": ",",
-			"escapeChar": "\"",
+			"escapeChar": {
+				"value": "@dataset().EscapeCharacter",
+				"type": "Expression"
+			},
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
