@@ -1,0 +1,92 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Actividad1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "MyVariable",
+					"value": {
+						"value": "@string(int('not an int'))",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Actividad 2",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Actividad1",
+						"dependencyConditions": [
+							"Succeeded",
+							"Failed"
+						]
+					},
+					{
+						"activity": "Actividad 4",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "MyVariable",
+					"value": {
+						"value": "@string('hi')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Actividad 3",
+				"description": "",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Actividad 2",
+						"dependencyConditions": [
+							"Skipped",
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "MyVariable",
+					"value": {
+						"value": "@string('hi2')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Actividad 4",
+				"description": "",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "MyVariable",
+					"value": {
+						"value": "@string('hi3')",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"MyVariable": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "Capitulo 6"
+		},
+		"annotations": []
+	}
+}
