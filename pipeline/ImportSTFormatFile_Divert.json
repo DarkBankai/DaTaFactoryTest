@@ -91,7 +91,8 @@
 								"value": "@pipeline().parameters.File",
 								"type": "Expression"
 							},
-							"LinkedServiceConnectionSecret": "StorageAccountConnectionString"
+							"LinkedServiceConnectionSecret": "StorageAccountConnectionString",
+							"EscapeCharacter": "\""
 						}
 					}
 				],
@@ -107,7 +108,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Import sales data",
+						"activity": "If rows skipped",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -305,6 +306,153 @@
 					"referenceName": "DBAzureSqlEjemplo",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "If rows skipped",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Import sales data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@greater(activity('Import sales data').output.rowsSkipped,0)",
+						"type": "Expression"
+					},
+					"ifTrueActivities": [
+						{
+							"name": "Copy data2",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSettings",
+										"recursive": true,
+										"wildcardFolderPath": "errors/copyactivity-logs/Import sales data",
+										"wildcardFileName": "*",
+										"enablePartitionDiscovery": false
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink"
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "ABS_CSV",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": "output",
+										"Directory": ".",
+										"File": ".",
+										"LinkedServiceConnectionSecret": "StorageAccountConnectionString",
+										"EscapeCharacter": "/"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "AzureSqlTable",
+									"type": "DatasetReference",
+									"parameters": {
+										"TableName": "LoadingError",
+										"Schema": "dbo"
+									}
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "errors/copyactivity-logs/Import sales data",
+							"wildcardFileName": "*",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ABS_CSV",
+						"type": "DatasetReference",
+						"parameters": {
+							"Container": "output",
+							"Directory": ".",
+							"File": ".",
+							"LinkedServiceConnectionSecret": "StorageAccountConnectionString",
+							"EscapeCharacter": "/"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSqlTable",
+						"type": "DatasetReference",
+						"parameters": {
+							"TableName": "LoadingError",
+							"Schema": "dbo"
+						}
+					}
+				]
 			}
 		],
 		"parameters": {
