@@ -47,7 +47,7 @@
 		"parameters": {
 			"FolderPath": {
 				"type": "string",
-				"defaultValue": "azure-data-factory-by-example-main/ SampleData/NaughtyButNice"
+				"defaultValue": "azure-data-factory-by-example-main/SampleData/NaughtyButNice"
 			}
 		},
 		"folder": {
