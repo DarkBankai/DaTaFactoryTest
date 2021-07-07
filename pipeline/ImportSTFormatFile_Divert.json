@@ -312,7 +312,7 @@
 				"type": "IfCondition",
 				"dependsOn": [
 					{
-						"activity": "Import sales data",
+						"activity": "CargaYLimpieza",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -454,6 +454,42 @@
 							]
 						}
 					]
+				}
+			},
+			{
+				"name": "CargaYLimpieza",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Import sales data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[PersistLoadedSales]",
+					"storedProcedureParameters": {
+						"runSeqNo": {
+							"value": {
+								"value": "@variables('RunSeqNo')",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "DBAzureSqlEjemplo",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],
