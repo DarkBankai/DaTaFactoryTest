@@ -92,7 +92,7 @@
 								"type": "Expression"
 							},
 							"LinkedServiceConnectionSecret": "StorageAccountConnectionString",
-							"EscapeCharacter": "\""
+							"EscapeCharacter": "/"
 						}
 					}
 				],
@@ -343,7 +343,10 @@
 									"storeSettings": {
 										"type": "AzureBlobStorageReadSettings",
 										"recursive": true,
-										"wildcardFolderPath": "errors/copyactivity-logs/Import sales data",
+										"wildcardFolderPath": {
+											"value": "@join(skip(split(activity('Import sales data').output.logFilePath, '/'), 1), '/')",
+											"type": "Expression"
+										},
 										"wildcardFileName": "*",
 										"enablePartitionDiscovery": false
 									},
@@ -357,6 +360,68 @@
 								"enableStaging": false,
 								"translator": {
 									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"name": "Timestamp",
+												"type": "String",
+												"physicalType": "String"
+											},
+											"sink": {
+												"name": "Timestamp",
+												"type": "DateTime",
+												"physicalType": "datetime2"
+											}
+										},
+										{
+											"source": {
+												"name": "Level",
+												"type": "String",
+												"physicalType": "String"
+											},
+											"sink": {
+												"name": "Level",
+												"type": "String",
+												"physicalType": "nvarchar"
+											}
+										},
+										{
+											"source": {
+												"name": "OperationName",
+												"type": "String",
+												"physicalType": "String"
+											},
+											"sink": {
+												"name": "OperationName",
+												"type": "String",
+												"physicalType": "nvarchar"
+											}
+										},
+										{
+											"source": {
+												"name": "OperationItem",
+												"type": "String",
+												"physicalType": "String"
+											},
+											"sink": {
+												"name": "OperationItem",
+												"type": "String",
+												"physicalType": "nvarchar"
+											}
+										},
+										{
+											"source": {
+												"name": "Message",
+												"type": "String",
+												"physicalType": "String"
+											},
+											"sink": {
+												"name": "Message",
+												"type": "String",
+												"physicalType": "nvarchar"
+											}
+										}
+									],
 									"typeConversion": true,
 									"typeConversionSettings": {
 										"allowDataTruncation": true,
@@ -373,7 +438,7 @@
 										"Directory": ".",
 										"File": ".",
 										"LinkedServiceConnectionSecret": "StorageAccountConnectionString",
-										"EscapeCharacter": "/"
+										"EscapeCharacter": "\""
 									}
 								}
 							],
