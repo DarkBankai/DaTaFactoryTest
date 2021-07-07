@@ -100,10 +100,7 @@
 							"Container": "sampledata",
 							"Directory": ".",
 							"File": ".",
-							"LinkedServiceConnectionSecret": {
-								"type": "SecureString",
-								"value": "**********"
-							}
+							"LinkedServiceConnectionSecret": "StorageAccountConnectionString"
 						}
 					}
 				],
