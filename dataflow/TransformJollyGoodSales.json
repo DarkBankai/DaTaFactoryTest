@@ -16,8 +16,12 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
-			"script": "source(output(\n\t\tPeriod as date 'yyyy-MM-dd',\n\t\tProduct as string,\n\t\t{Unit Price} as double,\n\t\tCurrency as string,\n\t\t{Units Sold} as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> source1"
+			"transformations": [
+				{
+					"name": "Filter1"
+				}
+			],
+			"script": "source(output(\n\t\tPeriod as date 'yyyy-MM-dd',\n\t\tProduct as string,\n\t\t{Unit Price} as double,\n\t\tCurrency as string,\n\t\t{Units Sold} as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> source1\nsource1 filter(Product!= 'Month Total') ~> Filter1"
 		}
 	}
 }
