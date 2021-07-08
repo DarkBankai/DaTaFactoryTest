@@ -56,7 +56,7 @@
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "LookupRunSqlNo",
+						"activity": "SetRunSqlNo",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -76,7 +76,7 @@
 						"type": "DataFlowReference",
 						"parameters": {
 							"RunSeqNo": {
-								"value": "@int(activity('Lookup1').output.firstRow.RunSeqNo)",
+								"value": "@int(variables('RunSqlNo'))",
 								"type": "Expression"
 							}
 						}
@@ -87,8 +87,123 @@
 					},
 					"traceLevel": "Fine"
 				}
+			},
+			{
+				"name": "PersistLoadSales",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "TransformJollyGoodSales",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[PersistLoadedSales]",
+					"storedProcedureParameters": {
+						"runSeqNo": {
+							"value": {
+								"value": "@int(variables('RunSqlNo'))",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "DBAzureSqlEjemplo",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "SetRunSqlNo",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "LookupRunSqlNo",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "RunSqlNo",
+					"value": {
+						"value": "@string(activity('LookupRunSqlNo').output.firstRow.RunSeqNo)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "LogPipelineEnd",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "PersistLoadSales",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[LogPipelineEnd]",
+					"storedProcedureParameters": {
+						"FilesRead": {
+							"value": "",
+							"type": "Int32"
+						},
+						"RowsCopied": {
+							"value": "",
+							"type": "Int32"
+						},
+						"RowsRead": {
+							"value": "",
+							"type": "Int32"
+						},
+						"RunEndDateTime": {
+							"value": "",
+							"type": "DateTime"
+						},
+						"RunSeqNo": {
+							"value": "",
+							"type": "Int32"
+						},
+						"RunStatus": {
+							"value": "",
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "DBAzureSqlEjemplo",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
+		"variables": {
+			"RunSqlNo": {
+				"type": "String",
+				"defaultValue": "-1"
+			}
+		},
 		"folder": {
 			"name": "Capitulo 7"
 		},
