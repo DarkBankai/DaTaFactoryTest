@@ -1,0 +1,27 @@
+{
+	"name": "UpdateProduct",
+	"properties": {
+		"folder": {
+			"name": "Capitulo 7"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable",
+						"type": "DatasetReference"
+					},
+					"name": "DboSales"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "DerivedColumn1"
+				}
+			],
+			"script": "source(output(\n\t\tRowId as integer,\n\t\tRetailer as string,\n\t\tSalesMonth as date,\n\t\tProduct as string,\n\t\tSalesValueUSD as decimal(19,2),\n\t\tUnitsSold as integer,\n\t\tRunSeqNo as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> DboSales\nDboSales derive(WeightString = :WeightString,\n\t\tProductName = trim(left(Product, length(Product) - length(:WeightString))),\n\t\tWeightInOunces = toFloat(replace(:WeightString, :WeightUnit,'')) / iif(:WeightUnit=='g', 28.3495, 1.0),\n\t\tWeightInGrams = toFloat(replace(:WeightString, :WeightUnit,'')) / iif(:WeightUnit=='oz', 0.035274, 1.0),\n\t\tWeightString := substring( Product,  length(Product) - locate(' ', reverse(Product) ) + 2 ),\n\t\tWeightUnit := iif(endsWith(Product,'oz'), 'oz', 'g')) ~> DerivedColumn1"
+		}
+	}
+}
