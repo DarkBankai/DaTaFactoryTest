@@ -1,0 +1,13 @@
+{
+	"name": "WrangleHandyCandyParquet",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"folder": {
+			"name": "Capitulo 9"
+		},
+		"typeProperties": {
+			"sources": [],
+			"sinks": []
+		}
+	}
+}
