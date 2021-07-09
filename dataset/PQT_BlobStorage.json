@@ -1,0 +1,53 @@
+{
+	"name": "PQT_BlobStorage",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AnyBlobStorage",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"ConnectionSecret": {
+					"value": "@dataset().StorageAccountConnectionString",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"Container": {
+				"type": "string"
+			},
+			"Directory": {
+				"type": "string"
+			},
+			"File": {
+				"type": "string"
+			},
+			"StorageAccountConnectionString": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "IngestaP"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().File",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().Directory",
+					"type": "Expression"
+				},
+				"container": {
+					"value": "@dataset().Container",
+					"type": "Expression"
+				}
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
