@@ -3,7 +3,10 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AnyBlobStorage",
-			"type": "LinkedServiceReference"
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"ConnectionSecret": "StorageAccountConnectionString"
+			}
 		},
 		"annotations": [],
 		"type": "Parquet",
