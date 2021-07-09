@@ -1,0 +1,54 @@
+{
+	"name": "RunHandyCandyPowerQ",
+	"properties": {
+		"activities": [
+			{
+				"name": "PQWrangleCandyParquet",
+				"type": "ExecuteWranglingDataflow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "WrangleHandyCandyParquet",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"SinkAzureSqlTable": {
+								"TableName": "Sales_LOAD",
+								"Schema": "dbo"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"sinks": {
+						"UserQuery": {
+							"name": "SinkAzureSqlTable",
+							"dataset": {
+								"referenceName": "AzureSqlTable",
+								"type": "DatasetReference",
+								"parameters": {
+									"TableName": "Sales_LOAD",
+									"Schema": "dbo"
+								}
+							},
+							"script": "sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> SinkAzureSqlTable"
+						}
+					}
+				}
+			}
+		],
+		"folder": {
+			"name": "Capitulo 9"
+		},
+		"annotations": []
+	}
+}
