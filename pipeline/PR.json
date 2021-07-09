@@ -31,7 +31,7 @@
 					},
 					"fieldList": [
 						"itemName",
-						"childItems"
+						"itemType"
 					],
 					"storeSettings": {
 						"type": "AzureFileStorageReadSettings",
@@ -41,14 +41,137 @@
 						"type": "DelimitedTextReadSettings"
 					}
 				}
+			},
+			{
+				"name": "SetFileName",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Metadata1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "FileName",
+					"value": {
+						"value": "@activity('Get Metadata1').output.itemName",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "SetAnio",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "SetFileName",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Anio",
+					"value": {
+						"value": "@substring(variables('FileName') , add( indexof(variables('FileName') , '_'), 1) , 4)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "SetMes",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "SetAnio",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Mes",
+					"value": {
+						"value": "@substring(variables('FileName') , add( indexof(variables('FileName') , '_'), 5) , 2)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "SetMes",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureFileStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "CSV_FileShare",
+						"type": "DatasetReference",
+						"parameters": {
+							"Directory": {
+								"value": "@pipeline().parameters.Directory",
+								"type": "Expression"
+							},
+							"File": {
+								"value": "@pipeline().parameters.File",
+								"type": "Expression"
+							}
+						}
+					}
+				]
 			}
 		],
 		"parameters": {
 			"Directory": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "PR/presupuestosygastos"
 			},
 			"File": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "presupuestogastosperu_202104.csv"
+			}
+		},
+		"variables": {
+			"FileName": {
+				"type": "String"
+			},
+			"Anio": {
+				"type": "String"
+			},
+			"Mes": {
+				"type": "String"
 			}
 		},
 		"folder": {
