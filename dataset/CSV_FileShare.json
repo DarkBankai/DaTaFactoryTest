@@ -1,0 +1,23 @@
+{
+	"name": "CSV_FileShare",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AnyFileStorage",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "IngestaP"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureFileStorageLocation"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
