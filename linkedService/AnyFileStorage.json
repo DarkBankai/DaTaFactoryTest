@@ -1,0 +1,19 @@
+{
+	"name": "AnyFileStorage",
+	"properties": {
+		"description": "Cualquier File Storage solo debemos enviar el SecretKey",
+		"annotations": [],
+		"type": "AzureFileStorage",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVaultEGH",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "StorageAccountConnectionString"
+			},
+			"fileShare": "1"
+		}
+	}
+}
