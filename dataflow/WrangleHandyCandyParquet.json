@@ -6,8 +6,18 @@
 			"name": "Capitulo 9"
 		},
 		"typeProperties": {
-			"sources": [],
-			"sinks": []
+			"sources": [
+				{
+					"name": "Parquet1",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet') ~>  Parquet1",
+					"dataset": {
+						"referenceName": "Parquet1",
+						"type": "DatasetReference"
+					}
+				}
+			],
+			"sinks": [],
+			"script": "section Section1;\r\nshared Parquet1 = let\r\n  AdfDoc = AzureStorage.BlobContents(\"https://almacenamientoeg.blob.core.windows.net/output/datalake/HandyCandy.parquet\"),\r\n  Parquet = Parquet.Document(AdfDoc)\r\nin\r\n  Parquet;\r\nshared UserQuery = let\r\n  Source = Parquet1,\r\n  #\"Removed columns\" = Table.RemoveColumns(Source, {\"TransactionId\", \"StoreId\"}),\r\n  #\"Added custom\" = Table.AddColumn(#\"Removed columns\", \"EndOfPreviousMonth\", each Date.AddDays([TransactionDate], -Date.Day([TransactionDate]))),\r\n  #\"Added custom 1\" = Table.AddColumn(#\"Added custom\", \"SalesMonth\", each Date.AddDays([EndOfPreviousMonth], 1)),\r\n  #\"Removed columns 1\" = Table.RemoveColumns(#\"Added custom 1\", {\"TransactionDate\", \"EndOfPreviousMonth\"}),\r\n  #\"Added custom 2\" = Table.AddColumn(#\"Removed columns 1\", \"ItemCount\", each 1),\r\n  #\"Grouped rows\" = Table.Group(#\"Added custom 2\", {\"SalesMonth\", \"Product\"}, {{\"SalesValueUSD\", each List.Sum([Price]), type nullable number}, {\"UnitsSold\", each List.Sum([ItemCount]), type any}}),\r\n  #\"Added custom 3\" = Table.AddColumn(#\"Grouped rows\", \"Retailer\", each \"Handy Candy\")\r\nin\r\n  #\"Added custom 3\";\r\n"
 		}
 	}
 }
