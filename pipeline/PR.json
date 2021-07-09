@@ -20,11 +20,11 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"Directory": {
-								"value": "@pipeline().parameters.Directory",
+								"value": "@pipeline().parameters.SourceDirectory",
 								"type": "Expression"
 							},
 							"File": {
-								"value": "@pipeline().parameters.File",
+								"value": "@pipeline().parameters.SourceFile",
 								"type": "Expression"
 							}
 						}
@@ -35,6 +35,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureFileStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -124,6 +125,26 @@
 				"typeProperties": {
 					"source": {
 						"type": "DelimitedTextSource",
+						"additionalColumns": [
+							{
+								"name": "FilePath",
+								"value": "$$FILEPATH"
+							},
+							{
+								"name": "Año_N",
+								"value": {
+									"value": "@variables('Anio')",
+									"type": "Expression"
+								}
+							},
+							{
+								"name": "Mes_N",
+								"value": {
+									"value": "@variables('Mes')",
+									"type": "Expression"
+								}
+							}
+						],
 						"storeSettings": {
 							"type": "AzureFileStorageReadSettings",
 							"recursive": true,
@@ -158,11 +179,11 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"Directory": {
-								"value": "@pipeline().parameters.Directory",
+								"value": "@pipeline().parameters.SourceDirectory",
 								"type": "Expression"
 							},
 							"File": {
-								"value": "@pipeline().parameters.File",
+								"value": "@pipeline().parameters.SourceFile",
 								"type": "Expression"
 							}
 						}
@@ -171,19 +192,38 @@
 				"outputs": [
 					{
 						"referenceName": "PQT_BlobStorage",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"Container": "outingesta",
+							"Directory": {
+								"value": "@concat(variables('Anio'), variables('Mes'))",
+								"type": "Expression"
+							},
+							"File": {
+								"value": "@pipeline().parameters.SinkFile",
+								"type": "Expression"
+							},
+							"StorageAccountConnectionString": "ConectionStringBSSalidaIngesta1"
+						}
 					}
 				]
 			}
 		],
 		"parameters": {
-			"Directory": {
+			"SourceDirectory": {
 				"type": "string",
 				"defaultValue": "PR/presupuestosygastos"
 			},
-			"File": {
+			"SourceFile": {
 				"type": "string",
 				"defaultValue": "presupuestogastosperu_202104.csv"
+			},
+			"SinkDirectory": {
+				"type": "string"
+			},
+			"SinkFile": {
+				"type": "string",
+				"defaultValue": "PresupuestoGastoPeru"
 			}
 		},
 		"variables": {
