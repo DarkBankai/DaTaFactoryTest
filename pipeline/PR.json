@@ -196,7 +196,7 @@
 						"parameters": {
 							"Container": "outingesta",
 							"Directory": {
-								"value": "@concat(variables('Anio'), variables('Mes'))",
+								"value": "@concat(variables('Anio'), '/',variables('Mes'))",
 								"type": "Expression"
 							},
 							"File": {
