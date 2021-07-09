@@ -11,9 +11,9 @@
 					"referenceName": "AzureKeyVaultEGH",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "@linkedService().ConnectionSecret1"
+				"secretName": "@linkedService().ConnectionSecret"
 			},
-			"fileShare": "dbk"
+			"fileShare": "@linkedService().FileShare"
 		}
 	}
 }
