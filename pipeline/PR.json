@@ -223,7 +223,7 @@
 			},
 			"SinkFile": {
 				"type": "string",
-				"defaultValue": "PresupuestoGastoPeru"
+				"defaultValue": "PresupuestoGastoPeru.parquet"
 			}
 		},
 		"variables": {
