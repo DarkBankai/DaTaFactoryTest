@@ -1,0 +1,19 @@
+{
+	"name": "FileStorageCcfileshare",
+	"properties": {
+		"description": "Conexion al Fileshare CCfilesare en el storage Almacenamientoeg",
+		"annotations": [],
+		"type": "AzureFileStorage",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVaultEGH",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "StorageAccountConnectionString"
+			},
+			"fileShare": "ccfileshare"
+		}
+	}
+}
