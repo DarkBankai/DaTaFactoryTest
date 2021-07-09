@@ -2,11 +2,8 @@
 	"name": "Parquet1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AnyBlobStorage",
-			"type": "LinkedServiceReference",
-			"parameters": {
-				"ConnectionSecret": "StorageAccountConnectionString"
-			}
+			"referenceName": "almacenamientoegsa",
+			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "Parquet",
